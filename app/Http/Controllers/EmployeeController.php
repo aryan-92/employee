@@ -62,11 +62,21 @@ class EmployeeController extends Controller
         $employee->department = $request->department;
         $employee->hire_date = $request->hire_date;
         $employee->save();
-        return $employee;
+        //return $employee;
         return response()->json('success', 200);
-        
+
+    }
+    public function delEmp($id)
+    {
+
+        return view('emplyoee.delete');
     }
     public function empDelete(Request $request){
-
+        //return 1;
+        //$id = $request;
+        //return $request->id;
+         $employee = Employee::where('id', $request->id)->first();
+         $employee->delete();
+        return response()->json('success', 200);
     }
 }

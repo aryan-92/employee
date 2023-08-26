@@ -23,5 +23,5 @@ Route::post('/store-employee',[EmployeeController::class,'Store'])->name('store-
 Route::get('/list-employee',[EmployeeController::class,'empList']);
 Route::get('/single-employee/{id}',[EmployeeController::class,'employee']);
 Route::post('/employee-edit',[EmployeeController::class,'empEdit']);
-Route::get('/employee-delete',[EmployeeController::class,'empDelete']);
+Route::get('/delete_emp',[EmployeeController::class,'empDelete']);
 

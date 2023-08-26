@@ -1,5 +1,19 @@
 @extends('layouts')
 @section('section')
+
+    <div class="row">
+
+            <div class="col-md-4">
+                <input type="text" name="sname" placeholder="name" class="form-control">
+            </div>
+
+        <div class="col-md-4">
+            <input type="text" name="sjob" placeholder="job title" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="sjob" placeholder="department" class="form-control">
+        </div>
+    </div>
     <a class="btn btn-success" style="float:left;margin-right:20px;" href="{{ url('/add-employee') }}">Create Employee</a>
     <table  class="table table-striped table-bordered emp" cellspacing="0" width="100%">
         <thead>
@@ -22,8 +36,10 @@
         $(document).ready(function() {
 
 
-            $(function() {
 
+
+
+            $(function() {
                 var table = $('.emp').DataTable({
                     processing: true,
                     serverSide: true,
@@ -71,10 +87,9 @@
                             render: function(data, type, row) {
                                 let emp_id = row['id'];
                                 let edit_url = "edit_emp/" + emp_id;
-                                let delete_url = "delete_emp/" + emp_id;
+                                let delete_url = "/delete_emp/" + emp_id;
                                 return "<a class='btn btn-sm btn-success waves-effect waves-themed' href='" +
-                                edit_url + "'>Edit </a>"+"<a class='btn btn-sm btn-danger waves-effect waves-themed' href='" +
-                                delete_url + "'>Delete </a>";
+                                edit_url + "'>Edit </a>"+"<button class='btn btn-sm btn-danger waves-effect waves-themed delEmp' id='delEmp' data-id='"+emp_id+"'>Delete</button>";
                                 //return 'action';
                             }
                         },
@@ -94,6 +109,31 @@
                 }); */
 
             });
+
+             //alert('di');
+
+
+  $('.emp').on('click', '.delEmp', function() {
+            //alert('di');
+             var id = $(this).attr('data-id');
+             //alert(id);
+
+            $.ajax({
+                method: "get",
+                url: "/api/delete_emp/",
+                data: {
+                _token: "{{ csrf_token() }}",
+                id: id
+                },
+                success: (result) => {
+                    console.log('success');
+                    window.location.replace("{{url('/')}}");
+                },
+                error: (error) => {
+
+                }
+            });
+        });
         });
     </script>
 @endsection

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get('/edit_emp/{id}',[EmployeeController::class,'editEmp'])->name('edit-employee');
+Route::get('/del_emp/{id}',[EmployeeController::class,'delEmp'])->name('del-employee');
 Route::get('/add-employee',[EmployeeController::class,'addEmp'])->name('add-employee');
 Route::get('/',[EmployeeController::class,'index'])->name('list-employee');
 
