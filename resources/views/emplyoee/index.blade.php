@@ -1,17 +1,37 @@
 @extends('layouts')
 @section('section')
 
-    <div class="row">
+    <div class="row mb-2 mt-4">
 
             <div class="col-md-4">
-                <input type="text" name="sname" placeholder="name" class="form-control">
+
+                    <select name="sname" id="sname" class="form-control">
+                        <option value="">slelect Name</option>
+                        @foreach ($emp as $item)
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+
+                {{-- <input type="text" name="sname" placeholder="name" id="sname" class="form-control"> --}}
             </div>
 
         <div class="col-md-4">
-            <input type="text" name="sjob" placeholder="job title" class="form-control">
+            <select name="sjob" id="job" class="form-control">
+                <option value="">slelect Job</option>
+                @foreach ($emp as $item)
+                <option value="{{ $item->job_title }}">{{ $item->job_title }}</option>
+                @endforeach
+            </select>
+            {{-- <input type="text" name="sjob" placeholder="job title" id="job" class="form-control"> --}}
         </div>
         <div class="col-md-4">
-            <input type="text" name="sjob" placeholder="department" class="form-control">
+            {{-- <input type="text" name="sdepartment" id="department" placeholder="department" class="form-control"> --}}
+            <select name="department" id="department" class="form-control">
+                <option value="">slelect Department</option>
+                @foreach ($emp as $item)
+                <option value="{{ $item->department  }}">{{ $item->department }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <a class="btn btn-success" style="float:left;margin-right:20px;" href="{{ url('/add-employee') }}">Create Employee</a>
@@ -48,9 +68,9 @@
                         url: "{{ url('api/list-employee') }}",
                         type: 'GET',
                         data: function(d) {
-                            d.batch_year = $('#batch_year').val(),
-                                d.sem_id = $('#sem_id').val(),
-                                d.stu_name = $('#stu_name').val()
+                            d.sname = $('#sname').val(),
+                                d.job = $('#job').val(),
+                                d.department = $('#department').val()
                             // d.search = $('input[type="search"]').val()
                         },
                     },
@@ -96,17 +116,17 @@
                     ]
                 });
 
-               /*  $('#batch_year').change(function() {
+                 $('#department').change(function() {
                     // alert('hi');
                     table.draw();
                 });
-                $('#sem_id').change(function() {
+                $('#job').change(function() {
                     // alert('hi');
                     table.draw();
                 });
-                $("#stu_name").keyup(function() {
+                $("#sname").change(function() {
                     table.draw();
-                }); */
+                });
 
             });
 

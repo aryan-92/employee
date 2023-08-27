@@ -2,6 +2,7 @@
 @section('section')
     <div class="row">
         <div class="container mt-4 py-5 w">
+            <h4 class="text-center ">Add Emplyoee</h4>
             <form class="p-md-5 border rounded-3 bg-body-tertiary" method="POST" id="submit-form">
                 @csrf
                 <!-- Name input -->
@@ -52,7 +53,7 @@
                     window.location.replace("{{url('/')}}");
                 },
                 error: (error) => {
-                    
+
                 }
             });
         });
